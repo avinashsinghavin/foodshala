@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>FoodShala</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+    <script src="./scriptjs.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./stylecss.css" />
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg navbar-light"
+      style="background-color: #07a5d3;"
+    >
+      <img src="./images/logo.png" style="width: 150px; height: 50px;" />
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto"></ul>
+        <div class="btn-group">
+          <button
+            type="button"
+            id="displayfoodtype"
+            class="btn btn-danger dropdown-toggle"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Veg & Non-veg
+          </button>
+          <div class="dropdown-menu" id="typeofitems">
+            <a class="dropdown-item" id="veg" onclick="Itemselected(this.id)"
+              >Veg</a
+            >
+            <a class="dropdown-item" id="nonveg" onclick="Itemselected(this.id)"
+              >Non-Veg</a
+            >
+            <a class="dropdown-item" id="both" onclick="Itemselected(this.id)"
+              >Veg & Non-Veg</a
+            >
+          </div>
+        </div>
+        &nbsp; &nbsp;&nbsp;
+        <button
+          type="button"
+          class="btn btn-outline-warning"
+          id="loginbtn"
+          onclick="popuplogin()"
+        >
+          Login</button
+        >&nbsp; &nbsp;&nbsp;
+        <div class="btn-group">
+          <button
+            type="button"
+            class="btn btn-outline-warning dropdown-toggle"
+            id="registerbtn"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Register</button
+          >&nbsp; &nbsp;&nbsp;
+          <div class="dropdown-menu" id="typeofitems">
+            <a class="dropdown-item" onclick="register_user()">User</a>
+            <a class="dropdown-item" onclick="register_restaurant()"
+              >Restaurant</a
+            >
+          </div>
+        </div>
+        <div class="btn-group">
+          <button type="button" style="display: none; border-radius: 25%;" id="userlogdbtn" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          </button>
+          <div class="dropdown-menu dropdown-menu-right">
+            <button class="dropdown-item" id="nameoflogin" type="button"></button>
+            <button style="display: none;" id ="addmenu" class="dropdown-item" onclick = additems() type="button">Add Menu</button>
+            <button class="dropdown-item" onclick="logout()" type="button">LogOut</button>
+          </div>
+        </div>
+        &nbsp; &nbsp;&nbsp;
+        <i id="cart_items" style="color: yellow;">0</i>
+        <svg
+        onclick="backetclick()"
+          width="2em"
+          height="2em"
+          viewBox="0 0 16 16"
+          class="bi bi-basket-fill"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.071 1.243a.5.5 0 0 1 .858.514L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 6h1.717L5.07 1.243zM3.5 10.5a.5.5 0 0 0-1 0v3a.5.5 0 0 0 1 0v-3zm2.5 0a.5.5 0 0 0-1 0v3a.5.5 0 0 0 1 0v-3zm2.5 0a.5.5 0 0 0-1 0v3a.5.5 0 0 0 1 0v-3zm2.5 0a.5.5 0 0 0-1 0v3a.5.5 0 0 0 1 0v-3zm2.5 0a.5.5 0 0 0-1 0v3a.5.5 0 0 0 1 0v-3z"
+          />
+        </svg>
+      </div>
+    </nav>
+    <!-- Login Popup -->
+    <div id="popuplogin" class="hover_bkgr_fricc">
+      <span class="helper"></span>
+      <div>
+        <div class="popupCloseButton" onclick="popupclose()">&times;</div>
+        <div id="userloginform">
+          <!-- <form id="userloginform"> -->
+          <div id="userloginform">
+            <div class="container" style="padding: 10px;">
+              <div class="row">
+                <div class="col">
+                  <a
+                    style="color: rgb(43, 110, 199); font-weight: bold;"
+                    id="userlogindiv"
+                    >User Login</a
+                  >
+                </div>
+                <div class="col">
+                  <a id="restaurantlogindiv" onclick="restaurantloginform()">
+                    Restaurant Login</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="forrm-group">
+              <img
+                src="./images/userlogin1.jpg"
+                style="
+                  border-radius: 50%;
+                  height: 100px;
+                  width: 100px;
+                  padding: 12px;
+                "
+              />
+              <h2>User Login</h2>
+            </div>
+            <div class="forrm-group">
+              <h6 id="userloginmatch" style="color: red; display: none;">
+                Wong UserId / Password
+              </h6>
+            </div>
+            <div class="form-group">
+              <input
+                type="email"
+                class="form-control"
+                id="useremaillogin"
+                placeholder="Enter Your Email"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="password"
+                class="form-control"
+                id="userpasswordlogin"
+                placeholder="Enter Your Password"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <a style="color: red;" onclick="forgotpssword()" id="useridforgot"
+                >Forgot Password</a
+              >
+            </div>
+            <div class="form-group">
+              <button
+                type="submit"
+                onclick="loginuser()"
+                class="btn btn-success"
+                style="width: 100%;"
+              >
+                LOGIN
+              </button>
+            </div>
+            <div class="form-group" style="padding: 10px;">
+              <a>
+                New to Internshala? Register (<a
+                  style="color: rgb(68, 185, 224);"
+                  >User </a
+                >/<a style="color: rgb(68, 185, 224);"> Restaurant</a>)</a
+              >
+            </div>
+            <!-- </form>       -->
+          </div>
+        </div>
+        <div id="restaurantloginform" style="display: none;">
+          <!-- <form id="restaurantloginform"> -->
+            <div class="container" style="padding: 10px;">
+              <div class="row">
+                <div class="col">
+                  <a id="userlogindiv" onclick="userloginform()">User Login</a>
+                </div>
+                <div class="col">
+                  <a
+                    id="restaurantlogindiv"
+                    style="color: rgb(43, 110, 199); font-weight: bold;"
+                  >
+                    Restaurant Login</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <img
+                src="./images/userlogin1.jpg"
+                style="
+                  border-radius: 50%;
+                  height: 100px;
+                  width: 100px;
+                  padding: 12px;
+                "
+              />
+              <h2>Restaurant Login</h2>
+            </div>
+            <div class="form-group">
+              <h6 id="restaurantloginmatch" style="color: red; display: none;">
+                Wong UserId / Password
+              </h6>
+            </div>
+            <div class="form-group">
+              <input
+                type="email"
+                class="form-control"
+                id="restaurantemaillogin"
+                placeholder="Enter Your Email"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="password"
+                class="form-control"
+                id="restaurantpasswordlogin"
+                placeholder="Enter Your Password"
+              />
+            </div>
+            <div class="form-group">
+              <a
+                style="color: red;"
+                onclick="forgotpssword()"
+                id="restaurantidforgot"
+                >Forgot Password</a
+              >
+            </div>
+            <div class="form-group">
+              <button
+                type="submit"
+                class="btn btn-success"
+                style="width: 100%;"
+                onclick="loginrestaurant()"
+              >
+                LOGIN
+              </button>
+            </div>
+            <div class="form-group" style="padding: 10px;">
+              <a>
+                New to Internshala? Register (<a
+                  style="color: rgb(68, 185, 224);"
+                  >User </a
+                >/<a style="color: rgb(68, 185, 224);"> Restaurant</a>)</a
+              >
+            </div>
+          <!-- </form> -->
+        </div>
+      </div>
+    </div>
+    <!-- Regestration Popup -->
+    <div id="popupregister" class="hover_bkgr_fricc">
+      <span class="helper"></span>
+    </div>
+    <div
+      style="
+        background-image: url(./images/home_image.jpg);
+        background-size: cover;
+        width: 100%;
+        height: 500px;
+      "
+    >
+      <div
+        style="
+          padding: 100px;
+          text-align: center;
+          background-image: linear-gradient(
+            to top,
+            rgba(24, 32, 26, 0),
+            rgba(93, 208, 212, 0.699)
+          );
+        "
+      >
+        <h1 style="color: white;">Welcome To FoodShala</h1>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <center>
+              <div class="input-group mb-3">
+                <input
+                  id = "SearchByRestaurant"
+                  type="text"
+                  class="form-control"
+                  placeholder="Restaurant Name"
+                />
+                <div class="input-group-append">
+                  <button class="btn btn-primary" 
+                  onclick="SearchByRestaurant()" type="button">Search</button>
+                </div>
+              </div>
+            </center>
+          </div>
+          <div class="col">
+            <center>
+              <div class="input-group mb-3">
+                <input
+                  id="SearchbyMenu"
+                  type="text"
+                  class="form-control"
+                  placeholder="Search Our Menu"
+                />
+                <div class="input-group-append">
+                  <button onclick="SearchbyMenu()" class="btn btn-success" type="button">Search</button>
+                </div>
+              </div>
+            </center>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="addmenuitems_restaurant" style ="display: none; background-color: rgba(73, 233, 225, 0.295);">
+      <div style="margin: auto; width: 50%; padding: 20px;">
+        <div style="border-radius: 20px; padding:10px ;background-color: #6ad370;">
+          <div id="addingmenues">
+            <h4 style="color: aquamarine;">Add Menu</h4>
+            <div class="form-group">
+              <input type="text" class="form-control" id="addmenu_itemname" placeholder="Enter Item Name">
+            </div>
+            <select id="selecteoption" class="form-control">
+              <option value="veg">Veg</option>
+              <option value="Nonveg">Non-Veg</option>
+            </select>
+            <div class="form-group">
+              <label>Select Image</label>
+              <input type="file" class="form-control-file" id="imagesfile">
+            </div>
+            <button onclick="additemtomenu()" class="btn btn-primary">Add Item</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="background-color: rgba(73, 233, 225, 0.295); padding: 10px;">
+      <div class="container" id = "displayallfood" style="width: 80%; margin: auto;">
+        <!-- <div id="itemsbackground" class="row"  style="padding: 20px;">
+          <div id="itemsimages" class="col-4" style="background-image: url(./images/home_image.jpg);background-size: cover;
+          width: 100%;">
+          </div>
+          <div class="col-8" style="background-color: rgb(114, 235, 124); padding: 10px;">
+            <h2 id="0itemname" style="color: #4628b1;">Chicken chowmin</h2>
+            <h4 id="0itemaddress"> Address</h4>
+            <h4 id="0itemresturantname">Resturant Name</h4>
+            <h4 id="0itemnumber">Number</h4>
+            <button onclick="addtobasket(this.id)" id="itemadd_backet" class="btn btn-success" style="float:right;">Order</button>
+            <button onclick="Basket(this.id)" id="orderitem" class="btn btn-success" style="float:left;">Add to Basket</button>
+          </div>
+        </div> -->
+      
+      </div>
+    </div>
+  </body>
+  <script></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"  crossorigin="anonymous"></script> -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"
+  ></script>
+</html>
