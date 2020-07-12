@@ -199,7 +199,7 @@
 			if ($con->query($sql) === FALSE) 
 				$check = FALSE;
 		}
-		if($checkemail)
+		if($check)
 			exit(json_encode(array("status" => "success")));
 		else exit(json_encode(array("status" => "Fails")));
 	}

@@ -1,4 +1,10 @@
 var arr = [];
+var items = {};
+try {
+    items = JSON.parse(sessionStorage.getItem('id'));
+} catch(E){
+    console.log(E);
+}
 typeofvalue = "";
 var vegnonvegsdata="both";
 var jsondata = {};
@@ -13,6 +19,13 @@ function popuplogin(){
 }
 
 window.onload = function() {
+    try {
+        var itemlength = items.data1.length;
+            if( itemlength > 0) 
+                document.getElementById("cart_items").innerHTML = itemlength;
+    } catch (e){
+        console.log("No Item is in Basket");
+    }
     $.ajax({
         url : 'server.php',
         type : 'POST',
@@ -83,6 +96,7 @@ window.onload = function() {
             }
         });
     }
+    
 }
 
 function userloginform() {
@@ -273,6 +287,7 @@ function logout() {
 }
 // Upload Mennu Items and photo
 function additemtomenu() {
+    console.log("added to menu");
     var imagefile = document.getElementById("imagesfile").files[0];
     var ItemName = document.getElementById("addmenu_itemname").value;
     var getoption = document.getElementById("selecteoption");
@@ -295,7 +310,7 @@ function additemtomenu() {
                 console.log("Sending File Data");
             },
             success : function(result, status) {
-                console.log(result);
+                console.log(result +"= === \n ==");
                 if(result.response == 1){
                     alert("Item added successfully");
                    console.log("Inserted");
@@ -518,4 +533,4 @@ function SearchbyMenu() {
             console.log(" Both Sending...");
         }
     });
- }
+}

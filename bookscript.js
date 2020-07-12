@@ -19,8 +19,8 @@ window.onload = function() {
                 document.getElementById("nameoflogin1").innerText = value.Name;
             }
             else {
-                alert("You are Unauthorized User");
-                window.location("http://localhost/food%20shala/");
+                alert("Login In First ");
+                window.location = "http://localhost/food%20shala/";
             }
         },
         beforeSend: function(){
@@ -113,6 +113,8 @@ function order() {
                 sessionStorage.clear();
                 alert("Order Placed ");
                 document.getElementById("displayallfood").innerHTML = "";
+                document.getElementById('cart_items1').innerHTML = "0";
+                window.location = "http://localhost/food%20shala/";
             }
             else {
                 alert("Error While Placing Order");
@@ -151,9 +153,9 @@ function viewOrder(){
                         maindiv.innerHTML += divrow;
                     }
                 }
-                else alert("No Items is in Basket");
+                else alert("No Items is Ordered");
             } catch(e) {
-                document.getElementById("noiteminbasket").style.display = "block";
+                document.getElementById("No Item has Been Ordered").style.display = "block";
                 console.log(e);
             }
         },

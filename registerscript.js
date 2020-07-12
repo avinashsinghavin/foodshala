@@ -36,8 +36,10 @@ function Registration_user() {
                 console.log(result);
                 value = $.parseJSON(result);
                 if(value.status === "success") {
-                    console.log(value);
-                   window.location = "http://localhost/food%20shala/";
+                    console.log("sucess login");
+                    logout();
+                    alert("User Registered");
+                    window.location = "http://localhost/food%20shala/";
                 }
                 else {
                     console.log(value);
@@ -73,6 +75,8 @@ function Registration_restaurant() {
                 console.log(result);
                 value = $.parseJSON(result);
                 if(value.status === "success") {
+                    logout();
+                    alert("You are Registered");
                     window.location =  "http://localhost/food%20shala/";
                 }
                 else {
@@ -125,4 +129,25 @@ function validnumber(phone) {
     }
     alert("Not a Valid Number length");
     return false;
+}
+function logout() {
+    console.log("Logout");
+    sessionStorage.removeItem("id");
+    jsondata = {};
+    user = "";
+    $.ajax({
+        url : 'server.php',
+        type : 'POST',
+        data : {
+            uid: 'logoutsession'
+        },
+        success : function(result, status) {
+            console.log(result);
+            value = $.parseJSON(result);
+            console.log(value);
+        },
+        beforeSend: function(){
+            console.log("Sending...");
+        }
+    });
 }
