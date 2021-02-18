@@ -84,9 +84,9 @@ window.onload = function() {
                     }
                     else {
                         if(kk.VegNonveg === "veg")
-                            var divrow = "<div id='"+i+"itemsbackground' class='row' style='padding: 20px;'><div id='"+i+"itemsimages' class='col-4' style='background-image: url(./Itemimages/"+kk.Imagespath+");background-size: cover; width: 100%;'></div><div class='col-8' style='background-color: rgb(114, 235, 124); padding: 10px;'><h2 id='"+i+"itemname' style='color: #4628b1;'>"+(kk.MenuName).toUpperCase()+"</h2><h4 id='"+i+"itemaddress'> Address : "+kk.RestAddress+"</h4><h4 id='"+i+"itemresturantname'> Name : "+kk.RestName+"</h4><h4 id='"+i+"itemnumber'> Phone No : "+kk.RestNumber+"</h4><button onclick='addtobasket(this.id)'' id='"+i+"itemadd_backet' class='btn btn-success' style='float:right;'>Add to Basket</button><button onclick='Basket(this.id)' id='"+i+"orderitem' class='btn btn-success' style='float:left;'>Order</button></div></div>";
+                            var divrow = "<div id='"+i+"itemsbackground' class='row' style='padding: 20px;'><div id='"+i+"itemsimages' class='col-4' style='background-image: url(./Itemimages/"+kk.Imagespath+");background-size: cover; width: 100%;'></div><div class='col-8' style='background-color: rgb(114, 235, 124); padding: 10px;'><h2 id='"+i+"itemname' style='color: #4628b1;'>"+(kk.MenuName).toUpperCase()+"</h2><h4 id='"+i+"itemaddress'> Address : "+kk.RestAddress+"</h4><h4 id='"+i+"itemresturantname'> Name : "+kk.RestName+"</h4><h4 id='"+i+"itemnumber'> Phone No : "+kk.RestNumber+"</h4><button onclick='addtobasket(this.id)'' id='"+i+"itemadd_backet' class='btn btn-success' style='float:right;'>Add to Basket</button></div></div>";
                         if(kk.VegNonveg === "Nonve")
-                            var divrow = "<div id='"+i+"itemsbackground' class='row' style='padding: 20px;'><div id='"+i+"itemsimages' class='col-4' style='background-image: url(./Itemimages/"+kk.Imagespath+");background-size: cover; width: 100%;'></div><div class='col-8' style='background-color: rgb(255, 102, 102); padding: 10px;'><h2 id='"+i+"itemname' style='color: #4628b1;'>"+(kk.MenuName).toUpperCase()+"</h2><h4 id='"+i+"itemaddress'> Address : "+kk.RestAddress+"</h4><h4 id='"+i+"itemresturantname'> Name : "+kk.RestName+"</h4><h4 id='"+i+"itemnumber'> Phone No : "+kk.RestNumber+"</h4><button onclick='addtobasket(this.id)'' id='"+i+"itemadd_backet' class='btn btn-danger' style='float:right;'>Add to Basket</button><button onclick='Basket(this.id)' id='"+i+"orderitem' class='btn btn-danger' style='float:left;'>Order</button></div></div>";
+                            var divrow = "<div id='"+i+"itemsbackground' class='row' style='padding: 20px;'><div id='"+i+"itemsimages' class='col-4' style='background-image: url(./Itemimages/"+kk.Imagespath+");background-size: cover; width: 100%;'></div><div class='col-8' style='background-color: rgb(255, 102, 102); padding: 10px;'><h2 id='"+i+"itemname' style='color: #4628b1;'>"+(kk.MenuName).toUpperCase()+"</h2><h4 id='"+i+"itemaddress'> Address : "+kk.RestAddress+"</h4><h4 id='"+i+"itemresturantname'> Name : "+kk.RestName+"</h4><h4 id='"+i+"itemnumber'> Phone No : "+kk.RestNumber+"</h4><button onclick='addtobasket(this.id)'' id='"+i+"itemadd_backet' class='btn btn-danger' style='float:right;'>Add to Basket</button></div></div>";
                     }
                     maindiv.innerHTML += divrow;
                 }
@@ -287,14 +287,16 @@ function logout() {
 }
 // Upload Mennu Items and photo
 function additemtomenu() {
-    console.log("added to menu");
     var imagefile = document.getElementById("imagesfile").files[0];
     var ItemName = document.getElementById("addmenu_itemname").value;
     var getoption = document.getElementById("selecteoption");
     var Option = getoption.options[getoption.selectedIndex].value;
     if(imagefile && ItemName && Option) {
         var fd = new FormData();
-        var files = $('#imagesfile')[0].files[0];
+        console.log(imagefile);
+        console.log(ItemName);
+        console.log(Option);
+        //var files = $('#imagesfile')[0].files[0];
         fd.append("file", imagefile);
         fd.append("menename",ItemName);
         fd.append("veg_nonveg",Option);
@@ -309,8 +311,8 @@ function additemtomenu() {
             beforeSend: function(){
                 console.log("Sending File Data");
             },
-            success : function(result, status) {
-                console.log(result +"= === \n ==");
+            success: function(result, status) {
+                
                 if(result.response == 1){
                     alert("Item added successfully");
                    console.log("Inserted");
@@ -329,10 +331,8 @@ function additemtomenu() {
     } else {
         alert("Fill all Data");
     }
-    console.log(imagefile);
-    console.log(ItemName);
-    console.log(Option);
 }
+
 
 function additems() {
     document.getElementById("addmenuitems_restaurant").style.display ="block";

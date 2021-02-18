@@ -124,17 +124,21 @@
 		}
 	}
 	// get menu Data
-	if(isset($_POST['menename'])) {
+	//print_r($_POST['veg_nonveg']);
+	if(isset($_POST['veg_nonveg'])) {
+		
 		session_start();
 		$uploadDir = 'Itemimages/';
 		$uploadStatus = 1; 
             // Upload file 
-		$uploadedFile = ''; 
-        if(!empty($_FILES["file"]["name"])){                  
+		$uploadedFile = '';
+        if(!empty($_FILES["file"]["name"])){   
+			           
             // File path config 
 			$fileName = basename($_FILES["file"]["name"]); 
 			$result=mysqli_query($con,"SELECT * from menu where images='$fileName'");
 			$data=mysqli_fetch_assoc($result);
+			
 			if($data) { 
 				exit(json_encode(array("status"=> "Imagenamealreadyexist")));
 			}
@@ -145,7 +149,7 @@
             if(in_array($fileType, $allowTypes)){ 
                 // Upload file to the server 
                 if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){ 
-                    $uploadedFile = $fileName; 
+					$uploadedFile = $fileName; 
                 }else{ 
 					$uploadStatus = 0; 
 					exit(json_encode(array("response"=> 0, "message" => "Sorry, there was an error uploading your file.")));
@@ -199,13 +203,14 @@
 			if ($con->query($sql) === FALSE) 
 				$check = FALSE;
 		}
-		if($check)
+		if($checkemail)
 			exit(json_encode(array("status" => "success")));
 		else exit(json_encode(array("status" => "Fails")));
 	}
 	// Display Customer Data
 	if(isset($_POST['uid']) && $_POST['uid'] == "getcustomerdata"){
 		session_start();
+		
 		if($_SESSION['type'] == "customer") {
 			$matchingdata = $_SESSION['number'];
 			$result = mysqli_query($con,"SELECT * from customers WHERE customernumber ='$matchingdata'");
@@ -223,7 +228,9 @@
 			}
 			$response['posts'] = $posts;
 			exit(json_encode($response));
-		} else {
+		}
+		if($_SESSION['type'] == "Restaurant") {
+			//exit(json_encode("REsturant"));
 			$matchingdata = $_SESSION['number'];
 			$result = mysqli_query($con,"SELECT * from customers WHERE restaurantnumber ='$matchingdata'");
 			$response = array();
@@ -236,7 +243,7 @@
 				$restaurantname = $row['restaurantname'];
 				$status = $row['status'];
 				$nooforders = $row['nooforders'];
-				array_push($posts,json_encode( array("customernumber"=> $customernumber, "restaurantnumber"=> $restaurantnumber, "itemname" => $itemname, "restaurantaddress" => $restaurantaddress, "restaurantname" =>$restaurantname, "status" => $status, "nooforders" => $nooforders )));
+				array_push($posts,json_encode( array("customernumber"=> $restaurantnumber, "restaurantnumber"=> $customernumber, "itemname" => $itemname, "restaurantaddress" => $restaurantaddress, "restaurantname" =>$restaurantname, "status" => $status, "nooforders" => $nooforders )));
 			}
 			$response['posts'] = $posts;
 			exit(json_encode($response));

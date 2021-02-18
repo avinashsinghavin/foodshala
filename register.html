@@ -100,8 +100,13 @@
               </div>
               <div class="form-group">
                 <label>Password</label>
-                <input type="password" class="form-control" id="register_customer_password" placeholder="***********" required>
+                <input type="password" onkeypress="checkPassword()" class="form-control" id="register_customer_password" placeholder="***********" required>
               </div>
+              <div  id="password-slider" style="width: 100%; height: 10px; display: none">
+                <div id="div-slider" style="width: 6%; height: 10px; background-color: red;"></div>
+                <span id="password_message" style="font-size: small;">Week Password</span>
+              </div>
+              <br>
               <div class="form-group">
                 <label>Enter Full Name</label>
                 <input type="text" class="form-control" id="register_customer_fullname" placeholder="Avinash Kumar Singh" required>

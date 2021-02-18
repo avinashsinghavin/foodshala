@@ -117,11 +117,19 @@ function ValidateEmail(mail) {
     return (false)
 }
 function validpassword(password) {
-    if(password.length > 6) {
+    console.log(password.length + "== " +checkSpecialChar(password))
+    if(password.length > 6 && checkSpecialChar(password) > 66) {
         return true;
     }
-    alert("password mus be greater than 6 digits")
-    return false;
+    if(password.length < 6) {
+        alert("password must be greater than 6 digits");
+        return false;
+    }
+    else if(checkSpecialChar(password) <= 66) {
+        alert("Password must be Strong")
+        return false;
+    }
+
 }
 function validnumber(phone) {
     if(phone.length === 10) {
@@ -150,4 +158,62 @@ function logout() {
             console.log("Sending...");
         }
     });
+}
+
+function checkPassword(){
+    var password_value = document.getElementById('register_customer_password').value;
+    var slider = document.getElementById('div-slider');
+    var message = document.getElementById('password_message');
+    var val = checkSpecialChar(password_value);
+    if(password_value.length < 6) {
+        val = 6;
+        slider.style.backgroundColor = "red";
+        message.innerText = "Week Password";
+        slider.style.width = val+"%";
+    }
+    if(val < 33) {
+        document.getElementById('password-slider').style.display = "block";
+        slider.style.width = val+"%";
+    }
+    if(password_value.length > 6) {
+        if( val < 33){
+            slider.style.backgroundColor = "red";
+            message.innerText = "Week Password";
+            slider.style.width = val+"%";
+        }
+        if( val < 66 && val >= 33){
+            slider.style.backgroundColor = "yellow";
+            message.innerText = "Medium Password";
+            slider.style.width = val+"%";
+        }
+        if( val >= 66){
+            slider.style.backgroundColor = "green";
+            message.innerText = "Strong Password";
+            if(val < 101)
+                slider.style.width = val+"%";
+            else slider.style.width="100%";
+        }
+    }
+}
+function checkSpecialChar(pass){
+    var score = 0;
+    if (!pass)
+        return score;
+    var letters = new Object();
+    for (var i=0; i<pass.length; i++) {
+        letters[pass[i]] = (letters[pass[i]] || 0) + 1;
+        score += 5.0 / letters[pass[i]];
+    }
+    var variations = {
+        digits: /\d/.test(pass),
+        lower: /[a-z]/.test(pass),
+        upper: /[A-Z]/.test(pass),
+        nonWords: /\W/.test(pass),
+    }
+    var variationCount = 0;
+    for (var check in variations) {
+        variationCount += (variations[check] == true) ? 1 : 0;
+    }
+    score += (variationCount - 1) * 10;
+    return parseInt(score);
 }

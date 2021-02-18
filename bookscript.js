@@ -144,18 +144,19 @@ function viewOrder(){
                 document.getElementById("displayallfood").style.display = "none";
                 document.getElementById("noiteminbasket").style.display = "none";
                 var maindiv = document.getElementById("history");
+                maindiv.innerHTML = "";
                 if(prev_data.posts.length > 0) {
                     document.getElementById("cart_items1").innerHTML = 0;
                     for(var i = 0; i < prev_data.posts.length; i++) {
                         var kk = $.parseJSON(prev_data.posts[i]);
                         console.log(kk);
-                        var divrow = "<div id='"+i+"itemsbackground' class='row' style='padding: 20px;'><div class='col' style='background-color: rgb(250,128,114); padding: 10px;'><h2 id='itemname' style='color: #4628b1;'>"+kk.itemname+"</h2><h4 id='"+i+"itemaddress'> Restaurant Number : "+kk.restaurantnumber+"</h4><h4>Restaurant Name : "+kk.restaurantname+"</h4><h4 id='"+i+"itemresturantname'> No of Plate Ordered : "+kk.nooforders+"</h4><h4 id='"+i+"itemnumber'> Status : "+kk.status+"</h4></div></div>";
+                        var divrow = "<div id='"+i+"itemsbackground' class='row' style='padding: 20px;'><div class='col' style='background-color: rgb(250,128,114); padding: 10px;'><h2 id='itemname' style='color: #4628b1;'>"+kk.itemname+"</h2><h4 id='"+i+"itemaddress'> Number : "+kk.restaurantnumber+"</h4><h4> Name : "+kk.restaurantname+"</h4><h4 id='"+i+"itemresturantname'> No of Plate Ordered : "+kk.nooforders+"</h4><h4 id='"+i+"itemnumber'> Status : "+kk.status+"</h4></div></div>";
                         maindiv.innerHTML += divrow;
                     }
                 }
                 else alert("No Items is Ordered");
             } catch(e) {
-                document.getElementById("No Item has Been Ordered").style.display = "block";
+                //alert("No Item has Been Ordered");;
                 console.log(e);
             }
         },
